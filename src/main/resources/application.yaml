@@ -1,0 +1,27 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: booking-service
+  datasource:
+    url: ${APP_DB_URL:jdbc:mysql://localhost:3306/booking-service}
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: 'SELECT 1'
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: 'UTC'
+        format_sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  port: ${APP_PORT:8080}
+  servlet:
+    context-path: /

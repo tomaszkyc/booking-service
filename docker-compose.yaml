@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  booking-service:
+    image: booking-service:local
+    build: .
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    environment:
+      APP_PORT: 8080
+      APP_DB_URL: jdbc:mysql://db:3306/booking-service
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=booking-service
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - '3306:3306'
